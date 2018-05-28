@@ -12,10 +12,13 @@ class App extends Component {
 
     this.state = {
       items: tasks,
-      isShowForm: false
+      isShowForm: false,
+      strSearch: ''
     };
 
     this.handleToogleForm = this.handleToogleForm.bind(this);
+    this.closeForm = this.closeForm.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   handleToogleForm(){
@@ -25,12 +28,27 @@ class App extends Component {
     )
   }
 
+  closeForm(){
+    this.setState({
+      isShowForm: false
+    }
+  )
+  }
+
+  handleSearch(value){
+    this.setState({
+      strSearch: value
+    }
+  )
+  }
+
   render() {
+    console.log('strString: ', this.state.strSearch);
     let items = this.state.items;
     let isShowForm = this.state.isShowForm;
     let elmForm = null;
     if(isShowForm) {
-      elmForm = <Form />;
+      elmForm = <Form onClickCancel={this.closeForm}/>;
     }
 
     return (
@@ -40,7 +58,10 @@ class App extends Component {
           {/* TITLE : END */}
 
           {/* CONTROL (SEARCH + SORT + ADD) : START */}
-          <Control isShowForm={isShowForm}  onClickAdd={this.handleToogleForm}/>
+          <Control
+            onClickSearchGo={this.handleSearch} 
+            isShowForm={isShowForm}
+            onClickAdd={this.handleToogleForm}/>
           {/* CONTROL (SEARCH + SORT + ADD) : END */}
 
           {/* FORM : START */}
