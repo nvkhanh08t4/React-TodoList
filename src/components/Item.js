@@ -9,7 +9,6 @@ class Item extends Component {
   }
 
   render() {
-    console.log(this.props.item);
     const {item} = this.props; // this.props.item;
     const {index} = this.props; // this.props.index;
 
